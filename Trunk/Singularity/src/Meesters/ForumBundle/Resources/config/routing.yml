@@ -1,3 +1,18 @@
-MeestersForumBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: MeestersForumBundle:Default:index }
+#forum index
+MeestersForumBundle_Index:
+    pattern:  /
+    defaults: { _controller: MeestersForumBundle:Category:index }
+
+#category
+MeestersForumBundle_CategoryIndex:
+    pattern:  /category
+    defaults: { _controller: MeestersForumBundle:Category:index }
+
+MeestersForumBundle_CategoryView:
+    pattern:  /category/{name}
+    defaults: { _controller: MeestersForumBundle:Category:view, name: null }
+
+#forum
+MeestersForumBundle_ForumView:
+    pattern:  /{name}
+    defaults: { _controller: MeestersForumBundle:Forum:view, name: null }

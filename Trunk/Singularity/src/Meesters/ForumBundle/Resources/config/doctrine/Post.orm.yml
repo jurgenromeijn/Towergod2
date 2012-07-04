@@ -1,0 +1,29 @@
+Meesters\ForumBundle\Entity\Post:
+    type: entity
+    table: null
+    repositoryClass: Meesters\ForumBundle\Entity\PostRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        message:
+            type: text
+        time:
+            type: datetime
+        edit_count:
+            type: integer
+        edit_time:
+            type: datetime
+            nullable: ~
+    manyToOne:
+        topic:
+            targetEntity: Meesters\ForumBundle\Entity\Topic
+            inversedBy: posts
+        user:
+            targetEntity: Meesters\UserBundle\Entity\User
+            inversedBy: posts
+    lifecycleCallbacks:
+        prePersist: [ create ]
+        preUpdate:  [ update ]

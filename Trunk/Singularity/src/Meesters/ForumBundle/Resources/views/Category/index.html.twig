@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Forum</h1>
+    {% if categories|length > 0 %}
+	{% for category in categories %}
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">{{ category.name }}</th>
+                        <th>Topics</th>
+                        <th>Posts</th>
+                        <th>Laatste post</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if category.forums|length > 0 %}
+                    {% for forum in category.forums %}
+                        <tr>
+                            <td>X</td>
+                            <td>
+                                <a href="{{ path('MeestersForumBundle_ForumView', {'name': forum.name}) }}">
+                                    <dl>
+                                        <dt>{{ forum.name }}</dt>
+                                            <dd>{{ forum.description }}</dd>
+                                    </dl>
+                                </a>
+                            </td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>laatste</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5">
+                            <p>Deze Categorie heeft nog geen forums.</p>
+                        </td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+	{% endfor %}
+    {% else %}
+	<p>Er zijn nog geen forums.</p>
+    {% endif %}
+{% endblock %}
