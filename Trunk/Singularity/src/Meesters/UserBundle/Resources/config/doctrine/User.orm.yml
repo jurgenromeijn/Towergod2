@@ -8,4 +8,11 @@ Meesters\UserBundle\Entity\User:
             id: true
             generator:
                 strategy: AUTO
+    oneToMany:
+        topics:
+            targetEntity: Meesters\ForumBundle\Entity\Topic
+            mappedBy: user
+        posts:
+            targetEntity: Meesters\ForumBundle\Entity\Post
+            mappedBy: user
     lifecycleCallbacks: {  }

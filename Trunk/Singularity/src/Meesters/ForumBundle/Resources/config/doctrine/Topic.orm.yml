@@ -1,0 +1,45 @@
+Meesters\ForumBundle\Entity\Topic:
+    type: entity
+    table: topics
+    repositoryClass: Meesters\ForumBundle\Entity\TopicRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: '100'
+        time:
+            type: datetime
+        views:
+            type: integer
+        sticky:
+            type: boolean
+        closed:
+            type: boolean
+    oneToMany:
+        posts:
+            targetEntity: Meesters\ForumBundle\Entity\Post
+            mappedBy: topic
+    manyToOne:
+        forum:
+            targetEntity: Meesters\ForumBundle\Entity\Forum
+            inversedBy: topics
+        user:
+            targetEntity: Meesters\UserBundle\Entity\User
+            inversedBy: topics
+    manyToMany:
+        readers:
+            targetEntity: Meesters\UserBundle\Entity\User
+            joinTable: 
+                name: users_read_topics
+                joinColumns: 
+                    topic_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    user_id:
+                        referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ create ]

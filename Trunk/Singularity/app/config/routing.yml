@@ -1,3 +1,7 @@
+MeestersMessageBundle:
+    resource: "@MeestersMessageBundle/Resources/config/routing.yml"
+    prefix:   /
+
 MeestersForumBundle:
     resource: "@MeestersForumBundle/Resources/config/routing.yml"
     prefix:   /
@@ -31,3 +35,7 @@ fos_user_change_password:
 MeestersUserBundle:
     resource: "@MeestersUserBundle/Resources/config/routing.yml"
     prefix:   /meesters
+    
+MeestersUserBundle:
+    resource: "@MeestersForumBundle/Resources/config/routing.yml"
+    prefix:   /forum

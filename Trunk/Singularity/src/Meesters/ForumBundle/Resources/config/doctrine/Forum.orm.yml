@@ -1,0 +1,28 @@
+Meesters\ForumBundle\Entity\Forum:
+    type: entity
+    table: forums
+    repositoryClass: Meesters\ForumBundle\Entity\ForumRepository
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: '100'
+        description:
+            type: text
+        position:
+            type: smallint
+    manyToOne:
+        category:
+            targetEntity: Meesters\ForumBundle\Entity\Category
+            inversedBy: forums
+    oneToMany:
+        topics:
+            targetEntity: Meesters\ForumBundle\Entity\Topic
+            mappedBy: forum
+    lifecycleCallbacks: {  }

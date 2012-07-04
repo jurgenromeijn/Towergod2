@@ -1,0 +1,7 @@
+parameters:
+#    meesters_message.example.class: Meesters\MessageBundle\Example
+
+services:
+#    meesters_message.example:
+#        class: %meesters_message.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
