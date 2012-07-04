@@ -1,0 +1,11 @@
+Meesters\UserBundle\Entity\User:
+    type: entity
+    table: users
+    repositoryClass: Meesters\UserBundle\Entity\UserRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }

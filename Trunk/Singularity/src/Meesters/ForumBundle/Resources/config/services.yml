@@ -1,0 +1,7 @@
+parameters:
+#    meesters_forum.example.class: Meesters\ForumBundle\Example
+
+services:
+#    meesters_forum.example:
+#        class: %meesters_forum.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
