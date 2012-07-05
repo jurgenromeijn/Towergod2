@@ -25,21 +25,21 @@ class CategoryController extends Controller {
 	
     }
     
-    public function viewAction($name)
+    public function showAction($id)
     {
         
 	$categoryRepository = $this->getDoctrine()->getRepository("MeestersForumBundle:Category");
         
-	$category = $categoryRepository->findOneByName($name);
+	$category = $categoryRepository->findOneById($id);
 	
-        if($category === null)
+        if(!$category)
         {
             
             throw $this->createNotFoundException("Categorie kon niet gevonden worden");
             
         }
         
-	return $this->render('MeestersForumBundle:Category:view.html.twig', array(
+	return $this->render('MeestersForumBundle:Category:show.html.twig', array(
 	    'category' => $category
 	));
         

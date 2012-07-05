@@ -4,10 +4,11 @@
     <h1>Forum</h1>
     {% if categories|length > 0 %}
 	{% for category in categories %}
+        <h2><a href="{{ path("MeestersForumBundle_CategoryShow", {'id': category.id}) }}">{{ category.name }}</a></h2>
             <table>
                 <thead>
                     <tr>
-                        <th colspan="2">{{ category.name }}</th>
+                        <th colspan="2">Forums</th>
                         <th>Topics</th>
                         <th>Posts</th>
                         <th>Laatste post</th>
@@ -19,7 +20,7 @@
                         <tr>
                             <td>X</td>
                             <td>
-                                <a href="{{ path('MeestersForumBundle_ForumView', {'name': forum.name}) }}">
+                                <a href="{{ path('MeestersForumBundle_ForumShow', {'id': forum.id}) }}">
                                     <dl>
                                         <dt>{{ forum.name }}</dt>
                                             <dd>{{ forum.description }}</dd>

@@ -23,6 +23,9 @@ Meesters\ForumBundle\Entity\Topic:
         posts:
             targetEntity: Meesters\ForumBundle\Entity\Post
             mappedBy: topic
+            cascade: [persist, remove]
+            orderBy:
+                time: ASC
     manyToOne:
         forum:
             targetEntity: Meesters\ForumBundle\Entity\Forum

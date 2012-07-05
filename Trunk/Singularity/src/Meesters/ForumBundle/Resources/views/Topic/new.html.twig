@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Forum</h1>
+
+    <form action="{{ path('MeestersForumBundle_TopicCreate', {'forumId': forum.id}) }}" method="post" {{ form_enctype(form) }}>
+        <h2>Topic toevoegen</h2>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Toevoegen</button>
+        </p>
+    </form>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('MeestersForumBundle_ForumShow', {'id': forum.id}) }}">
+                Terug naar forum overzicht
+            </a>
+        </li>
+    </ul>
+{% endblock %}

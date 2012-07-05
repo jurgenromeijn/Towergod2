@@ -12,21 +12,21 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ForumController extends Controller 
 {    
-    public function viewAction($name)
+    public function showAction($id)
     {
         
         $forumRepository = $this->getDoctrine()->getRepository("MeestersForumBundle:Forum");
         
-        $forum = $forumRepository->findOneByName($name);
+        $forum = $forumRepository->findOneById($id);
                 
-        if($forum === null)
+        if(!$forum)
         {
             
             throw $this->createNotFoundException("Forum kon niet gevonden worden");
             
         }
         
-	return $this->render('MeestersForumBundle:Forum:view.html.twig', array(
+	return $this->render('MeestersForumBundle:Forum:show.html.twig', array(
 	    'forum' => $forum
 	));
         

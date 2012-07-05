@@ -2,6 +2,9 @@
 
 {% block body %}
     <h1>{{ forum.name }}</h1>
+    {% if app.user != null %}
+        <a href="{{ path('MeestersForumBundle_TopicNew', {'forumId': forum.id}) }}">Nieuw topic</a>
+    {% endif %}
     <table>
         <thead>
             <tr>
@@ -16,7 +19,7 @@
                 {% for topic in forum.topics %}
                     <tr>
                         <td>X</td>
-                        <td>{{ topic.name }}</td>
+                        <td><a href="{{ path('MeestersForumBundle_TopicShow', {'id': topic.id}) }}">{{ topic.name }}</a></td>
                         <td>0</td>
                         <td>0</td>
                         <td>Laatste</td>
