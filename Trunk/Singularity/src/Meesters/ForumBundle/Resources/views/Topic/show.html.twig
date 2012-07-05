@@ -1,20 +1,25 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h1>{{ topic.name }}</h1>
+    <h1>{% trans %}global.forum{% endtrans %}</h1>
+    <h2>{{ topic.name }}</h2>
     
+    {% if app.user != null %}
+        <a href="{{ path('MeestersForumBundle_PostNew', {'topicId': topic.id}) }}">Reageer</a>
+    {% endif %}
+        
     <ul>
         {% for post in topic.posts %}
-        <li>
-            <div>
-                <h5>{{ post.user.username }}</h5>
-                <img src="avatar" alt="{{ post.user.username }}" />
-            </div>
-            <div>
-                <p>{{ post.message }}</p>
-                <p>{{ post.time|date('Y-m-d H:i:s') }}</p>
-            </div>
-        </li>
+            <li>
+                <div>
+                    <h5>{{ post.user.username }}</h5>
+                    <img src="avatar" alt="{{ post.user.username }}" />
+                </div>
+                <div>
+                    <p>{{ post.message }}</p>
+                    <p>{{ post.time|date('Y-m-d H:i:s') }}</p>
+                </div>
+            </li>
         {% endfor %}
     </ul>
 
@@ -26,13 +31,13 @@
         </li>
         <li>
             <a href="{{ path('MeestersForumBundle_TopicEdit', { 'id': topic.id }) }}">
-                Edit
+                {% trans %}global.button.edit{% endtrans %}
             </a>
         </li>
         <li>
             <form action="{{ path('MeestersForumBundle_TopicDelete', { 'id': topic.id }) }}" method="post">
                 {{ form_widget(delete_form) }}
-                <button type="submit">Delete</button>
+                <button type="submit">{% trans %}global.button.delete{% endtrans %}</button>
             </form>
         </li>
     </ul>

@@ -14,7 +14,7 @@ class CategoryController extends Controller {
 
     public function indexAction() 
     {
-	
+
 	$categoryRepository = $this->getDoctrine()->getRepository("MeestersForumBundle:Category");
 	
 	$categories = $categoryRepository->findAll();

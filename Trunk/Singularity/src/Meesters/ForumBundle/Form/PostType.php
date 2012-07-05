@@ -12,7 +12,7 @@ class PostType extends AbstractType
     {
         
         $builder->add('message', null, array(
-            'label' => 'Bericht'
+            'label' => 'post.form.field.message'
         ));
         
     }

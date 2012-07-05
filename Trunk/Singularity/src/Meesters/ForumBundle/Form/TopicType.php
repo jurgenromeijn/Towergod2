@@ -11,10 +11,10 @@ class TopicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', null, array(
-            'label' => 'Onderwerp'
+            'label' => 'topic.form.field.name'
         ));
         $builder->add('sticky', null, array(
-            'label'    => 'Sticky',
+            'label'    => 'topic.form.field.sticky',
             'required' => false
         ));
         $builder->add('posts', 'collection', array(

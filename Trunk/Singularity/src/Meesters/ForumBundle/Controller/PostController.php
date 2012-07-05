@@ -10,10 +10,32 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Jurgen
  */
-class PostController extends Controller {
+class PostController extends Controller 
+{
 
-    public function indexAction() {
-        return new Response('Hello world!');
+    public function newAction($topicId)
+    {
+        
+    }
+    
+    public function createAction($topicId)
+    {
+        
+    }
+    
+    public function editAction($id)
+    {
+        
+    }
+    
+    public function updateAction($id)
+    {
+        
+    }
+    
+    public function deleteAction($id)
+    {
+    
     }
 
 }

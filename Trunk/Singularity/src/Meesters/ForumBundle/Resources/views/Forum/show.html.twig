@@ -1,17 +1,20 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h1>{{ forum.name }}</h1>
+    <h1>{% trans %}global.forum{% endtrans %}</h1>
+    <h2>{{ forum.name }}</h2>
+    
     {% if app.user != null %}
-        <a href="{{ path('MeestersForumBundle_TopicNew', {'forumId': forum.id}) }}">Nieuw topic</a>
+        <a href="{{ path('MeestersForumBundle_TopicNew', {'forumId': forum.id}) }}">{% trans %}forum.display.button.new_topic{% endtrans %}</a>
     {% endif %}
+        
     <table>
         <thead>
             <tr>
-                <th colspan="2">Topics</th>
-                <th>Reacties</th>
-                <th>Bekeken</th>
-                <th>Laatste bericht</th>
+                <th colspan="2">{% trans %}forum.display.field.topics{% endtrans %}</th>
+                <th>{% trans %}forum.display.field.replies{% endtrans %}</th>
+                <th>{% trans %}forum.display.field.views{% endtrans %}</th>
+                <th>{% trans %}forum.display.field.last_post{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +31,7 @@
             {% else %}
                 <tr>
                     <td colspan="5">
-                        <p>Er zijn nog geen topics in dit forum.</p>
+                        <p>{% trans %}forum.display.error.empty{% endtrans %}</p>
                     </td>
                 </tr>
             {% endif %}
