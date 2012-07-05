@@ -44,3 +44,27 @@ MeestersForumBundle_TopicDelete:
     pattern:  /topic/{id}/delete
     defaults: { _controller: "MeestersForumBundle:Topic:delete" }
     requirements: { _method: post }
+    
+#post
+MeestersForumBundle_PostNew:
+    pattern:  /topic/{topicId}/post/new
+    defaults: { _controller: "MeestersForumBundle:Post:new" }
+
+MeestersForumBundle_PostCreate:
+    pattern:  /topic/{topicId}/post/create
+    defaults: { _controller: "MeestersForumBundle:Post:create" }
+    requirements: { _method: post }
+
+MeestersForumBundle_PostEdit:
+    pattern:  /post/{id}/edit
+    defaults: { _controller: "MeestersForumBundle:Post:edit" }
+
+MeestersForumBundle_PostUpdate:
+    pattern:  /post/{id}/update
+    defaults: { _controller: "MeestersForumBundle:Post:update" }
+    requirements: { _method: post }
+
+MeestersForumBundle_PostDelete:
+    pattern:  /post/{id}/delete
+    defaults: { _controller: "MeestersForumBundle:Post:delete" }
+    requirements: { _method: post }

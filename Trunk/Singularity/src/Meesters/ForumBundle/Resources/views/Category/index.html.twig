@@ -1,17 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h1>Forum</h1>
+    <h1>{% trans %}global.forum{% endtrans %}</h1>
     {% if categories|length > 0 %}
 	{% for category in categories %}
         <h2><a href="{{ path("MeestersForumBundle_CategoryShow", {'id': category.id}) }}">{{ category.name }}</a></h2>
             <table>
                 <thead>
                     <tr>
-                        <th colspan="2">Forums</th>
-                        <th>Topics</th>
-                        <th>Posts</th>
-                        <th>Laatste post</th>
+                        <th colspan="2">{% trans %}category.display.field.forums{% endtrans %}</th>
+                        <th>{% trans %}category.display.field.topics{% endtrans %}</th>
+                        <th>{% trans %}category.display.field.posts{% endtrans %}</th>
+                        <th>{% trans %}category.display.field.last_post{% endtrans %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +35,7 @@
                 {% else %}
                     <tr>
                         <td colspan="5">
-                            <p>Deze Categorie heeft nog geen forums.</p>
+                            <p>{% trans %}category.display.error.empty{% endtrans %}</p>
                         </td>
                     </tr>
                 {% endif %}
@@ -43,6 +43,6 @@
             </table>
 	{% endfor %}
     {% else %}
-	<p>Er zijn nog geen forums.</p>
+	<p>{% trans %}global.error.empty{% endtrans %}</p>
     {% endif %}
 {% endblock %}

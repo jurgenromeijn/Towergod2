@@ -1,0 +1,50 @@
+global:
+    forum: Forum
+    button:
+        add: Toevoegen
+        edit: Aanpassen
+        delete: Verwijderen
+    error:
+        empty: Er zijn nog geen forums
+category:
+    display:
+        error:
+            not_found: Categorie kon niet gevonden worden.
+            empty: Deze categorie heeft nog geen forums.
+        field:
+            forums: Forums
+            topics: Topics
+            posts:  Posts
+            last_post: Laatste post
+forum:
+    display:
+        button:
+            new_topic: Nieuw Topic
+        error:
+            not_found: Forum kon niet gevonden worden.
+            empty: Er zijn nog geen topics in dit forum.
+        field:
+            topics: Topics
+            replies: Reacties
+            views: Bekeken
+            last_post: Laatste reactie
+topic: 
+    display:
+        button:
+            new:
+                reply: Nieuwe reactie
+        error:
+            not_found: Topic kon niet gevonden worden
+    form:
+        header:
+            add: Topic toevoegen
+            edit: Topic aanpassen
+        field:
+            name: Onderwerp
+            sticky: Sticky
+post:
+    form:
+        header:
+            add: Reactie toevoegen
+        field:
+            message: Bericht
