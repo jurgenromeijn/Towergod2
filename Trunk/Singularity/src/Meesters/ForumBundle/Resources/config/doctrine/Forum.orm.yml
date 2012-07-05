@@ -2,8 +2,6 @@ Meesters\ForumBundle\Entity\Forum:
     type: entity
     table: forums
     repositoryClass: Meesters\ForumBundle\Entity\ForumRepository
-    constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
     fields:
         id:
             type: integer
@@ -21,8 +19,13 @@ Meesters\ForumBundle\Entity\Forum:
         category:
             targetEntity: Meesters\ForumBundle\Entity\Category
             inversedBy: forums
+            cascade: [persist, remove]
     oneToMany:
         topics:
             targetEntity: Meesters\ForumBundle\Entity\Topic
             mappedBy: forum
+            cascade: [persist]
+            orderBy:
+                sticky: DESC
+                time: DESC
     lifecycleCallbacks: {  }

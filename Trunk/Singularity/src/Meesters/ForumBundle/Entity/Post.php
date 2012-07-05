@@ -198,4 +198,31 @@ class Post
         $this->edit_time = new \DateTime();
     }
     
+    /**
+     * @var Meesters\UserBundle\Entity\User
+     */
+    private $edit_user;
+
+
+    /**
+     * Set edit_user
+     *
+     * @param Meesters\UserBundle\Entity\User $editUser
+     * @return Post
+     */
+    public function setEditUser(\Meesters\UserBundle\Entity\User $editUser = null)
+    {
+        $this->edit_user = $editUser;
+        return $this;
+    }
+
+    /**
+     * Get edit_user
+     *
+     * @return Meesters\UserBundle\Entity\User 
+     */
+    public function getEditUser()
+    {
+        return $this->edit_user;
+    }
 }

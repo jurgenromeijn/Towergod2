@@ -199,6 +199,18 @@ class Topic
         $this->posts[] = $posts;
         return $this;
     }
+    
+//    /**
+//     * Remove posts
+//     *
+//     * @param Meesters\ForumBundle\Entity\Post $posts
+//     * @return Topic
+//     */
+//    public function removePost(\Meesters\ForumBundle\Entity\Post $posts)
+//    {
+//        $this->posts->removeElement($posts);
+//        return $this;
+//    }
 
     /**
      * Get posts
@@ -209,6 +221,16 @@ class Topic
     {
         return $this->posts;
     }
+        
+//    /**
+//     * Set posts
+//     * 
+//     * @param Meesters\ForumBundle\Entity\Post $post 
+//     */
+//    public function setPosts($post)
+//    {
+//        $this->posts->add($post);
+//    }
 
     /**
      * Set forum

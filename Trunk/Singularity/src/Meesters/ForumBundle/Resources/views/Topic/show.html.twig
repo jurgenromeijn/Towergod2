@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>{{ topic.name }}</h1>
+    
+    <ul>
+        {% for post in topic.posts %}
+        <li>
+            <div>
+                <h5>{{ post.user.username }}</h5>
+                <img src="avatar" alt="{{ post.user.username }}" />
+            </div>
+            <div>
+                <p>{{ post.message }}</p>
+                <p>{{ post.time|date('Y-m-d H:i:s') }}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('MeestersForumBundle_ForumShow', {'id': topic.forum.id}) }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('MeestersForumBundle_TopicEdit', { 'id': topic.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>
+            <form action="{{ path('MeestersForumBundle_TopicDelete', { 'id': topic.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+{% endblock %}

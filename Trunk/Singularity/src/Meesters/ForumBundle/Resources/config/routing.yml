@@ -8,11 +8,39 @@ MeestersForumBundle_CategoryIndex:
     pattern:  /category
     defaults: { _controller: MeestersForumBundle:Category:index }
 
-MeestersForumBundle_CategoryView:
-    pattern:  /category/{name}
-    defaults: { _controller: MeestersForumBundle:Category:view, name: null }
+MeestersForumBundle_CategoryShow:
+    pattern:  /category/{id}
+    defaults: { _controller: MeestersForumBundle:Category:show, name: null }
 
 #forum
-MeestersForumBundle_ForumView:
-    pattern:  /{name}
-    defaults: { _controller: MeestersForumBundle:Forum:view, name: null }
+MeestersForumBundle_ForumShow:
+    pattern:  /{id}
+    defaults: { _controller: MeestersForumBundle:Forum:show, name: null }
+
+#topic
+MeestersForumBundle_TopicNew:
+    pattern:  /{forumId}/topic/new
+    defaults: { _controller: "MeestersForumBundle:Topic:new" }
+
+MeestersForumBundle_TopicCreate:
+    pattern:  /{forumId}/topic/create
+    defaults: { _controller: "MeestersForumBundle:Topic:create" }
+    requirements: { _method: post }
+
+MeestersForumBundle_TopicShow:
+    pattern:  /topic/{id}
+    defaults: { _controller: "MeestersForumBundle:Topic:show" }
+
+MeestersForumBundle_TopicEdit:
+    pattern:  /topic/{id}/edit
+    defaults: { _controller: "MeestersForumBundle:Topic:edit" }
+
+MeestersForumBundle_TopicUpdate:
+    pattern:  /topic/{id}/update
+    defaults: { _controller: "MeestersForumBundle:Topic:update" }
+    requirements: { _method: post }
+
+MeestersForumBundle_TopicDelete:
+    pattern:  /topic/{id}/delete
+    defaults: { _controller: "MeestersForumBundle:Topic:delete" }
+    requirements: { _method: post }

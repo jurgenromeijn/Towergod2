@@ -16,7 +16,7 @@ Meesters\ForumBundle\Entity\Post:
             type: integer
         edit_time:
             type: datetime
-            nullable: ~
+            nullable: true
     manyToOne:
         topic:
             targetEntity: Meesters\ForumBundle\Entity\Topic
@@ -24,6 +24,9 @@ Meesters\ForumBundle\Entity\Post:
         user:
             targetEntity: Meesters\UserBundle\Entity\User
             inversedBy: posts
+        edit_user:
+            targetEntity: Meesters\UserBundle\Entity\User
+            nullable: true
     lifecycleCallbacks:
         prePersist: [ create ]
         preUpdate:  [ update ]
