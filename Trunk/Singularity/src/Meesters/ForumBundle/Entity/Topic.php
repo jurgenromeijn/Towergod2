@@ -124,11 +124,12 @@ class Topic
 
     public function __construct()
     {
-        $this->posts      = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->readers    = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->closed     = false;
-        $this->sticky     = false;
-        $this->view_count = 0;
+        $this->posts       = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->readers     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->closed      = false;
+        $this->sticky      = false;
+        $this->view_count  = 0;
+        $this->reply_count = -1;
     }
     
     /**
@@ -324,11 +325,13 @@ class Topic
      * @return Topic
      */
     public function addPost(\Meesters\ForumBundle\Entity\Post $posts)
-    {   
-        $this->posts[] = $posts;
-        
+    {           
         // Update topic
+        $this->last_post = $posts;
         $this->time = new \DateTime();
+        
+        $this->posts[] = $posts;
+        $this->reply_count++;
         
         return $this;
     }

@@ -17,9 +17,7 @@ class TopicType extends AbstractType
             'label'    => 'topic.form.field.sticky',
             'required' => false
         ));
-        $builder->add('posts', 'collection', array(
-            'type' => new PostType()
-        ));
+        $builder->add('first_post', new PostType());
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
