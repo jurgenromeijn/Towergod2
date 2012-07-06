@@ -56,10 +56,8 @@ class TopicController extends Controller
         
         // Handle entities
         $topic = new Topic();
-        $post  = new Post();
         
         // Create form
-        $topic->addPost($post);
         $form   = $this->createForm(new TopicType(), $topic);
 
         return $this->render('MeestersForumBundle:Topic:new.html.twig', array(
@@ -89,12 +87,6 @@ class TopicController extends Controller
         
         //Handle entities
         $topic   = new Topic();
-        $topic->setUser($user);
-        $topic->setForum($forum);
-        $post    = new Post();
-        $post->setUser($user);
-        $post->setTopic($topic);
-        $topic->addPost($post);
         
         //Create form
         $request = $this->getRequest();
@@ -103,7 +95,13 @@ class TopicController extends Controller
 
         if ($form->isValid()) 
         {
-            $entityManager->persist($post);
+            $topic->setUser($user);
+            $topic->setForum($forum);
+            $post    = $topic->getFirstPost();
+            $post->setUser($user);
+            $post->setTopic($topic);
+            $topic->addPost($post);
+            
             $entityManager->persist($topic);
             $entityManager->flush();
 
