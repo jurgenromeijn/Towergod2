@@ -35,7 +35,7 @@ class CategoryController extends Controller {
         if(!$category)
         {
             
-            throw $this->createNotFoundException("Categorie kon niet gevonden worden");
+            throw $this->createNotFoundException($this->get('translator')->trans('category.display.error.not_found'));
             
         }
         

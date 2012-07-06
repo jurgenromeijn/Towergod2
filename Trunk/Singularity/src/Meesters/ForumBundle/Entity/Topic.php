@@ -9,6 +9,54 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Topic
 {
+
+//    public function __construct()
+//    {
+//        $this->posts   = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->readers = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->closed  = false;
+//        $this->sticky  = false;
+//        $this->views   = 0;
+//    }
+    
+//    /**
+//     * Add posts
+//     *
+//     * @param Meesters\ForumBundle\Entity\Post $posts
+//     * @return Topic
+//     */
+//    public function addPost(\Meesters\ForumBundle\Entity\Post $posts)
+//    {   
+//        $this->posts[] = $posts;
+//        
+//        // Update topic
+//        $this->time = new \DateTime();
+//        
+//        return $this;
+//    }
+//    
+//    /**
+//     * Remove posts
+//     *
+//     * @param Meesters\ForumBundle\Entity\Post $posts
+//     * @return Topic
+//     */
+//    public function removePost(\Meesters\ForumBundle\Entity\Post $posts)
+//    {
+//        $this->posts->removeElement($posts);
+//        return $this;
+//    }
+        
+//    /**
+//     * Set posts
+//     * 
+//     * @param Meesters\ForumBundle\Entity\Post $post 
+//     */
+//    public function setPosts($post)
+//    {
+//        $this->posts->add($post);
+//    }
+
     /**
      * @var integer $id
      */
@@ -25,9 +73,14 @@ class Topic
     private $time;
 
     /**
-     * @var integer $views
+     * @var integer $view_count
      */
-    private $views;
+    private $view_count;
+
+    /**
+     * @var integer $reply_count
+     */
+    private $reply_count;
 
     /**
      * @var boolean $sticky
@@ -38,6 +91,16 @@ class Topic
      * @var boolean $closed
      */
     private $closed;
+
+    /**
+     * @var Meesters\ForumBundle\Entity\Post
+     */
+    private $first_post;
+
+    /**
+     * @var Meesters\ForumBundle\Entity\Post
+     */
+    private $last_post;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -61,11 +124,11 @@ class Topic
 
     public function __construct()
     {
-        $this->posts   = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->readers = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->closed  = false;
-        $this->sticky  = false;
-        $this->views   = 0;
+        $this->posts      = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->readers    = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->closed     = false;
+        $this->sticky     = false;
+        $this->view_count = 0;
     }
     
     /**
@@ -123,25 +186,47 @@ class Topic
     }
 
     /**
-     * Set views
+     * Set view_count
      *
-     * @param integer $views
+     * @param integer $viewCount
      * @return Topic
      */
-    public function setViews($views)
+    public function setViewCount($viewCount)
     {
-        $this->views = $views;
+        $this->view_count = $viewCount;
         return $this;
     }
 
     /**
-     * Get views
+     * Get view_count
      *
      * @return integer 
      */
-    public function getViews()
+    public function getViewCount()
     {
-        return $this->views;
+        return $this->view_count;
+    }
+
+    /**
+     * Set reply_count
+     *
+     * @param integer $replyCount
+     * @return Topic
+     */
+    public function setReplyCount($replyCount)
+    {
+        $this->reply_count = $replyCount;
+        return $this;
+    }
+
+    /**
+     * Get reply_count
+     *
+     * @return integer 
+     */
+    public function getReplyCount()
+    {
+        return $this->reply_count;
     }
 
     /**
@@ -189,28 +274,64 @@ class Topic
     }
 
     /**
+     * Set first_post
+     *
+     * @param Meesters\ForumBundle\Entity\Post $firstPost
+     * @return Topic
+     */
+    public function setFirstPost(\Meesters\ForumBundle\Entity\Post $firstPost = null)
+    {
+        $this->first_post = $firstPost;
+        return $this;
+    }
+
+    /**
+     * Get first_post
+     *
+     * @return Meesters\ForumBundle\Entity\Post 
+     */
+    public function getFirstPost()
+    {
+        return $this->first_post;
+    }
+
+    /**
+     * Set last_post
+     *
+     * @param Meesters\ForumBundle\Entity\Post $lastPost
+     * @return Topic
+     */
+    public function setLastPost(\Meesters\ForumBundle\Entity\Post $lastPost = null)
+    {
+        $this->last_post = $lastPost;
+        return $this;
+    }
+
+    /**
+     * Get last_post
+     *
+     * @return Meesters\ForumBundle\Entity\Post 
+     */
+    public function getLastPost()
+    {
+        return $this->last_post;
+    }
+
+    /**
      * Add posts
      *
      * @param Meesters\ForumBundle\Entity\Post $posts
      * @return Topic
      */
     public function addPost(\Meesters\ForumBundle\Entity\Post $posts)
-    {
+    {   
         $this->posts[] = $posts;
+        
+        // Update topic
+        $this->time = new \DateTime();
+        
         return $this;
     }
-    
-//    /**
-//     * Remove posts
-//     *
-//     * @param Meesters\ForumBundle\Entity\Post $posts
-//     * @return Topic
-//     */
-//    public function removePost(\Meesters\ForumBundle\Entity\Post $posts)
-//    {
-//        $this->posts->removeElement($posts);
-//        return $this;
-//    }
 
     /**
      * Get posts
@@ -221,16 +342,6 @@ class Topic
     {
         return $this->posts;
     }
-        
-//    /**
-//     * Set posts
-//     * 
-//     * @param Meesters\ForumBundle\Entity\Post $post 
-//     */
-//    public function setPosts($post)
-//    {
-//        $this->posts->add($post);
-//    }
 
     /**
      * Set forum
@@ -297,10 +408,11 @@ class Topic
     {
         return $this->readers;
     }
-    
+    /**
+     * @ORM\PrePersist
+     */
     public function create()
     {
-        $this->time = new \DateTime();
+        
     }
-    
 }

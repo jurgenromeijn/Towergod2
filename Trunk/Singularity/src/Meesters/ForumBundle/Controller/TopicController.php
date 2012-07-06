@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Meesters\ForumBundle\Entity\Topic;
 use Meesters\ForumBundle\Entity\Post;
+
 use Meesters\ForumBundle\Form\TopicType;
 
 /**
@@ -26,7 +27,7 @@ class TopicController extends Controller
         $topic = $entityManager->getRepository('MeestersForumBundle:Topic')->find($id);
 
         if (!$topic) {
-            throw $this->createNotFoundException('Topic kon niet gevonden worden.');
+            throw $this->createNotFoundException($this->get('translator')->trans('topic.display.error.not_found'));
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -49,13 +50,15 @@ class TopicController extends Controller
         if(!$forum)
         {
             
-            throw $this->createNotFoundException('Forum kon niet gevonden worden');
+            throw $this->createNotFoundException($this->get('translator')->trans('forum.display.error.not_found'));
             
         }
         
-        //Create form
+        // Handle entities
         $topic = new Topic();
         $post  = new Post();
+        
+        // Create form
         $topic->addPost($post);
         $form   = $this->createForm(new TopicType(), $topic);
 
@@ -78,13 +81,13 @@ class TopicController extends Controller
         if(!$forum)
         {
             
-            throw $this->createNotFoundException('Forum kon niet gevonden worden');
+            throw $this->createNotFoundException($this->get('translator')->trans('forum.display.error.not_found'));
             
         }
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        //Create form
+        //Handle entities
         $topic   = new Topic();
         $topic->setUser($user);
         $topic->setForum($forum);
@@ -92,14 +95,15 @@ class TopicController extends Controller
         $post->setUser($user);
         $post->setTopic($topic);
         $topic->addPost($post);
+        
+        //Create form
         $request = $this->getRequest();
         $form    = $this->createForm(new TopicType(), $topic);
         $form->bindRequest($request);
 
-        $topic->getPosts()->first()->setEditUser($user);
-        
         if ($form->isValid()) 
         {
+            $entityManager->persist($post);
             $entityManager->persist($topic);
             $entityManager->flush();
 
@@ -125,7 +129,7 @@ class TopicController extends Controller
 
         if(!$topic)
         {
-            throw $this->createNotFoundException('Unable to find Topic entity.');
+            throw $this->createNotFoundException($this->get('translator')->trans('topic.display.error.not_found'));
         }
 
         $editForm = $this->createForm(new TopicType(), $topic);
@@ -149,7 +153,7 @@ class TopicController extends Controller
         $topic = $entityManager->getRepository('MeestersForumBundle:Topic')->find($id);
 
         if (!$topic) {
-            throw $this->createNotFoundException('Unable to find Topic entity.');
+            throw $this->createNotFoundException($this->get('translator')->trans('topic.display.error.not_found'));
         }
 
         $editForm   = $this->createForm(new TopicType(), $topic);
@@ -192,7 +196,7 @@ class TopicController extends Controller
         $topic = $entityManager->getRepository('MeestersForumBundle:Topic')->find($id);
 
         if (!$topic) {
-            throw $this->createNotFoundException('Unable to find Topic entity.');
+            throw $this->createNotFoundException($this->get('translator')->trans('topic.display.error.not_found'));
         }
         
         $forum = $topic->getForum();

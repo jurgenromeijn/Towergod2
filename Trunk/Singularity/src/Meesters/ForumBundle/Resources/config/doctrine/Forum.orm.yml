@@ -13,8 +13,16 @@ Meesters\ForumBundle\Entity\Forum:
             length: '100'
         description:
             type: text
+        topic_count:
+            type: integer
+        post_count:
+            type: integer
         position:
             type: smallint
+    oneToOne:
+        last_post:
+            targetEntity: Meesters\ForumBundle\Entity\Post
+            nullable: true
     manyToOne:
         category:
             targetEntity: Meesters\ForumBundle\Entity\Category
