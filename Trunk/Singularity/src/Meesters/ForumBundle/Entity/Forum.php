@@ -25,9 +25,24 @@ class Forum
     private $description;
 
     /**
+     * @var integer $topic_count
+     */
+    private $topic_count;
+
+    /**
+     * @var integer $post_count
+     */
+    private $post_count;
+
+    /**
      * @var smallint $position
      */
     private $position;
+
+    /**
+     * @var Meesters\ForumBundle\Entity\Post
+     */
+    private $last_post;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -99,6 +114,50 @@ class Forum
     }
 
     /**
+     * Set topic_count
+     *
+     * @param integer $topicCount
+     * @return Forum
+     */
+    public function setTopicCount($topicCount)
+    {
+        $this->topic_count = $topicCount;
+        return $this;
+    }
+
+    /**
+     * Get topic_count
+     *
+     * @return integer 
+     */
+    public function getTopicCount()
+    {
+        return $this->topic_count;
+    }
+
+    /**
+     * Set post_count
+     *
+     * @param integer $postCount
+     * @return Forum
+     */
+    public function setPostCount($postCount)
+    {
+        $this->post_count = $postCount;
+        return $this;
+    }
+
+    /**
+     * Get post_count
+     *
+     * @return integer 
+     */
+    public function getPostCount()
+    {
+        return $this->post_count;
+    }
+
+    /**
      * Set position
      *
      * @param smallint $position
@@ -118,6 +177,28 @@ class Forum
     public function getPosition()
     {
         return $this->position;
+    }
+
+    /**
+     * Set last_post
+     *
+     * @param Meesters\ForumBundle\Entity\Post $lastPost
+     * @return Forum
+     */
+    public function setLastPost(\Meesters\ForumBundle\Entity\Post $lastPost = null)
+    {
+        $this->last_post = $lastPost;
+        return $this;
+    }
+
+    /**
+     * Get last_post
+     *
+     * @return Meesters\ForumBundle\Entity\Post 
+     */
+    public function getLastPost()
+    {
+        return $this->last_post;
     }
 
     /**
@@ -163,10 +244,4 @@ class Forum
     {
         return $this->category;
     }
-    
-    public function __toString()
-    {
-        return $this->name;
-    }
-    
 }

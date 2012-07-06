@@ -23,8 +23,8 @@
                     <tr>
                         <td>X</td>
                         <td><a href="{{ path('MeestersForumBundle_TopicShow', {'id': topic.id}) }}">{{ topic.name }}</a></td>
-                        <td>0</td>
-                        <td>0</td>
+                        <td>{{ topic.posts|length - 1 }}</td>
+                        <td></td>
                         <td>Laatste</td>
                     </tr>
                 {% endfor %}

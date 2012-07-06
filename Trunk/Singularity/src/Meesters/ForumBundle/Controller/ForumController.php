@@ -22,7 +22,7 @@ class ForumController extends Controller
         if(!$forum)
         {
             
-            throw $this->createNotFoundException("Forum kon niet gevonden worden");
+            throw $this->createNotFoundException($this->get('translator')->trans('forum.display.error.not_found'));
             
         }
         

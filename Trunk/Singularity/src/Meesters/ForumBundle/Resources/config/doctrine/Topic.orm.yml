@@ -13,12 +13,19 @@ Meesters\ForumBundle\Entity\Topic:
             length: '100'
         time:
             type: datetime
-        views:
+        view_count:
+            type: integer
+        reply_count:
             type: integer
         sticky:
             type: boolean
         closed:
             type: boolean
+    oneToOne:
+        first_post:
+            targetEntity: Meesters\ForumBundle\Entity\Post
+        last_post:
+            targetEntity: Meesters\ForumBundle\Entity\Post
     oneToMany:
         posts:
             targetEntity: Meesters\ForumBundle\Entity\Post
@@ -30,6 +37,7 @@ Meesters\ForumBundle\Entity\Topic:
         forum:
             targetEntity: Meesters\ForumBundle\Entity\Forum
             inversedBy: topics
+            cascade: [persist]
         user:
             targetEntity: Meesters\UserBundle\Entity\User
             inversedBy: topics

@@ -1,1 +1,21 @@
-{# empty Twig template #}
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>{% trans %}global.forum{% endtrans %}</h1>
+
+    <form action="{{ path('MeestersForumBundle_PostCreate', {'topicId': topic.id}) }}" method="post" {{ form_enctype(form) }}>
+        <h2>{% trans %}post.form.header.add{% endtrans %}</h2>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">{% trans %}global.button.add{% endtrans %}</button>
+        </p>
+    </form>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('MeestersForumBundle_TopicShow', {'id': topic.id}) }}">
+                Terug naar topic
+            </a>
+        </li>
+    </ul>
+{% endblock %}
