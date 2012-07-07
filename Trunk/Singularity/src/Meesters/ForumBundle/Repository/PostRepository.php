@@ -1,6 +1,6 @@
 <?php
 
-namespace Meesters\ForumBundle\Entity;
+namespace Meesters\ForumBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
