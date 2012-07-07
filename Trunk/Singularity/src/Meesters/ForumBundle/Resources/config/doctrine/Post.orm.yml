@@ -1,6 +1,6 @@
 Meesters\ForumBundle\Entity\Post:
     type: entity
-    table: null
+    table: posts
     repositoryClass: Meesters\ForumBundle\Entity\PostRepository
     fields:
         id:
