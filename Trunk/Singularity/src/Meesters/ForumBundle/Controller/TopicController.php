@@ -193,7 +193,8 @@ class TopicController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $topic = $entityManager->getRepository('MeestersForumBundle:Topic')->find($id);
 
-        if (!$topic) {
+        if (!$topic) 
+        {
             throw $this->createNotFoundException($this->get('translator')->trans('topic.display.error.not_found'));
         }
         
@@ -201,6 +202,34 @@ class TopicController extends Controller
         
         if ($form->isValid()) 
         {
+            
+            $forum = $topic->getForum();
+            
+            $forumLastPost = $forum->getLastPost();
+            $forumPostCount = $forum->getPostCount();
+            $forumTopicCount = $forum->getTopicCount();
+            
+            if($topic->getPosts()->exists(function($key, Post $post) use ($forumLastPost)
+                {
+                    return ($forumLastPost != null &&($forumLastPost->getId() == $post->getId()));
+                }))
+            {
+                $forum->setLastPost(null);
+            }
+            
+            // Have to delete the post entity in 2 goes because of all the conflicting relations
+            $topic->setFirstPost(null);
+            $topic->setLastPost(null);
+                        
+            foreach ($topic->getPosts() as $post) 
+            {
+                $forumPostCount--;
+                $entityManager->remove($post);
+            }
+            $entityManager->flush();
+            
+            $forumTopicCount--;
+            $forum->setPostCount($forumPostCount);
             
             $entityManager->remove($topic);
             $entityManager->flush();
