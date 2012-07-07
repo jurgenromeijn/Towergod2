@@ -1,7 +1,7 @@
 Meesters\ForumBundle\Entity\Post:
     type: entity
     table: posts
-    repositoryClass: Meesters\ForumBundle\Entity\PostRepository
+    repositoryClass: Meesters\ForumBundle\Repository\PostRepository
     fields:
         id:
             type: integer

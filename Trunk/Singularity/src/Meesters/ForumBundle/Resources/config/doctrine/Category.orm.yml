@@ -1,7 +1,7 @@
 Meesters\ForumBundle\Entity\Category:
     type: entity
     table: forum_categories
-    repositoryClass: Meesters\ForumBundle\Entity\CategoryRepository
+    repositoryClass: Meesters\ForumBundle\Repository\CategoryRepository
     fields:
         id:
             type: integer
