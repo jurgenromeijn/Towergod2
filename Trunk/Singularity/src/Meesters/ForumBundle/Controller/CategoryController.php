@@ -17,8 +17,9 @@ class CategoryController extends Controller {
 
 	$categoryRepository = $this->getDoctrine()->getRepository("MeestersForumBundle:Category");
 	
-	$categories = $categoryRepository->findAll();
-	
+	//$categories = $categoryRepository->findAll();
+        $categories = $categoryRepository->findAllOrderedByPosition();
+        
 	return $this->render('MeestersForumBundle:Category:index.html.twig', array(
 	    'categories' => $categories
 	));
@@ -30,7 +31,8 @@ class CategoryController extends Controller {
         
 	$categoryRepository = $this->getDoctrine()->getRepository("MeestersForumBundle:Category");
         
-	$category = $categoryRepository->findOneById($id);
+        $category = $categoryRepository->findOneByIdOrderedByPosition($id);
+	//$category = $categoryRepository->findOneById($id);
 	
         if(!$category)
         {

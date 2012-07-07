@@ -12,4 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+    public function findOneLastPostForForum($forumId)
+    {
+        $query = $this->getEntityManager()->createQueryBuilder()
+                    ->select('p')
+                    ->from('MeestersForumBundle:Post', 'p')
+                    ->join('p.topic', 't')
+                    ->join('t.forum', 'f')
+                    ->where('f.id = :forumId')
+                    ->orderBy('p.time', 'DESC')
+                    ->setParameter('forumId', $forumId)
+                    ->getQuery()
+                    ->setMaxResults(1);
+        
+        try
+        {
+            return $query->getSingleResult();
+        }
+        catch (\Exception $e)
+        {
+            return null;
+        }
+    }
 }

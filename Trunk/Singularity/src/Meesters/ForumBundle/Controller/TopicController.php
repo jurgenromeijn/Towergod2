@@ -209,13 +209,18 @@ class TopicController extends Controller
             $forumPostCount = $forum->getPostCount();
             $forumTopicCount = $forum->getTopicCount();
             
-            if($topic->getPosts()->exists(function($key, Post $post) use ($forumLastPost)
+            $forumLastPostNeedsUpdate = false;
+            
+            if(!$forumLastPost || $topic->getPosts()->exists(function($key, Post $post) use ($forumLastPost)
                 {
                     return ($forumLastPost != null &&($forumLastPost->getId() == $post->getId()));
                 }))
             {
                 $forum->setLastPost(null);
+                $forumLastPostNeedsUpdate = true;
             }
+            
+            var_dump($forumLastPostNeedsUpdate);
             
             // Have to delete the post entity in 2 goes because of all the conflicting relations
             $topic->setFirstPost(null);
@@ -231,9 +236,18 @@ class TopicController extends Controller
             $forumTopicCount--;
             $forum->setPostCount($forumPostCount);
             
+            if($forumLastPostNeedsUpdate)
+            {
+                $postRepository = $this->getDoctrine()->getRepository("MeestersForumBundle:Post");
+                $lastPost = $postRepository->findOneLastPostForForum($forum->getId());
+                
+                var_dump($lastPost);
+                
+                $forum->setLastPost($lastPost);
+            }
+            
             $entityManager->remove($topic);
             $entityManager->flush();
-            
         }
 
         return $this->redirect($this->generateUrl('MeestersForumBundle_ForumShow', array('id' => $forum->getId())));
