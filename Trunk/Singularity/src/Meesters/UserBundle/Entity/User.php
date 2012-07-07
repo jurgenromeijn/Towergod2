@@ -39,6 +39,7 @@ class User extends BaseUser
     {
         $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+        parent::__construct();
     }
     
     /**
