@@ -12,4 +12,34 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    public function findAllOrderedByPosition()
+    {
+        $query = $this->getEntityManager()->createQueryBuilder()
+                    ->select('c, f, p')
+                    ->from('MeestersForumBundle:Category', 'c')
+                    ->join('c.forums', 'f')
+                    ->leftJoin('f.last_post', 'p')
+                    ->orderBy('c.position', 'ASC')
+                    ->orderBy('f.position', 'ASC')
+                    ->getQuery();
+        
+        return $query->getResult();
+    }
+    
+    public function findOneByIdOrderedByPosition($id)
+    {
+        $query = $this->getEntityManager()->createQueryBuilder()
+                    ->select('c, f, p')
+                    ->from('MeestersForumBundle:Category', 'c')
+                    ->join('c.forums', 'f')
+                    ->leftJoin('f.last_post', 'p')
+                    ->where('c.id = :id')
+                    ->orderBy('c.position', 'ASC')
+                    ->orderBy('f.position', 'ASC')
+                    ->setParameter('id', $id)
+                    ->getQuery();
+        
+        return $query->getSingleResult();
+    }
+
 }

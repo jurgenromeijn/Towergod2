@@ -18,7 +18,7 @@ class ForumController extends Controller
         $forumRepository = $this->getDoctrine()->getRepository("MeestersForumBundle:Forum");
         
         $forum = $forumRepository->findOneById($id);
-                
+        
         if(!$forum)
         {
             

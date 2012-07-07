@@ -336,7 +336,7 @@ class Topic
         $forumPostCount = $this->forum->getPostCount();
         $forumPostCount++;
         $this->forum->setPostCount($forumPostCount);
-        //$this->forum->setLastPost($posts);
+        $this->forum->setLastPost($posts);
         
         return $this;
     }

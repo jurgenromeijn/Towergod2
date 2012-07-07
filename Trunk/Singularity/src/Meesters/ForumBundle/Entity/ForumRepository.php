@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class ForumRepository extends EntityRepository
 {
+    
+//    public function findAllOrderedByPosition()
+//    {
+//        $this->getEntityManager()->createQueryBuilder()
+//                ->select("f, c, p")
+//                ->from("MeestersForumBundle:Forum", "f")
+//                ->join("f.category", "c")
+//                ->join("f.last_post", "p")
+//                ->orderBy($sort);
+//    }
 }
