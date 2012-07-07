@@ -329,9 +329,14 @@ class Topic
         // Update topic
         $this->last_post = $posts;
         $this->time = new \DateTime();
-        
         $this->posts[] = $posts;
         $this->reply_count++;
+        
+        // Update forum
+        $forumPostCount = $this->forum->getPostCount();
+        $forumPostCount++;
+        $this->forum->setPostCount($forumPostCount);
+        //$this->forum->setLastPost($posts);
         
         return $this;
     }
@@ -411,11 +416,24 @@ class Topic
     {
         return $this->readers;
     }
+    
     /**
      * @ORM\PrePersist
      */
     public function create()
     {
-        
+        $forumTopicCount = $this->forum->getTopicCount();
+        $forumTopicCount++;
+        $this->forum->setTopicCount($forumTopicCount);
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function delete()
+    {
+        $forumTopicCount = $this->forum->getTopicCount();
+        $forumTopicCount--;
+        $this->forum->setTopicCount($forumTopicCount);    
     }
 }

@@ -45,6 +45,11 @@ class Post
     private $user;
 
     /**
+     * @var Meesters\UserBundle\Entity\User
+     */
+    private $edit_user;
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -186,24 +191,6 @@ class Post
         return $this->user;
     }
     
-    public function create()
-    {
-        $this->time       = new \DateTime();
-        $this->edit_count = 0;
-    }
-    
-    public function update()
-    {
-        $this->edit_count++;
-        $this->edit_time = new \DateTime();
-    }
-    
-    /**
-     * @var Meesters\UserBundle\Entity\User
-     */
-    private $edit_user;
-
-
     /**
      * Set edit_user
      *
@@ -224,5 +211,33 @@ class Post
     public function getEditUser()
     {
         return $this->edit_user;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function create()
+    {
+        $this->time       = new \DateTime();
+        $this->edit_count = 0;
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function update()
+    {
+        $this->edit_count++;
+        $this->edit_time = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PreRemove
+     */
+    public function delete()
+    {
+        $replyCount = $this->topic->getReplyCount();
+        $replyCount--;
+        $this->topic->setReplyCount($replyCount);
     }
 }

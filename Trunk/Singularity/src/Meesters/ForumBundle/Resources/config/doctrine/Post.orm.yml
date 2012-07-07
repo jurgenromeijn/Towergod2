@@ -28,5 +28,6 @@ Meesters\ForumBundle\Entity\Post:
             targetEntity: Meesters\UserBundle\Entity\User
             nullable: true
     lifecycleCallbacks:
-        prePersist: [ create ]
-        preUpdate:  [ update ]
+        prePersist: [create]
+        preUpdate:  [update]
+        preRemove:  [delete]

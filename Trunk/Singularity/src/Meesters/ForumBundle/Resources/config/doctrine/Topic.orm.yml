@@ -53,4 +53,5 @@ Meesters\ForumBundle\Entity\Topic:
                     user_id:
                         referencedColumnName: id
     lifecycleCallbacks:
-        prePersist: [ create ]
+        prePersist: [create]
+        preRemove:  [delete]
